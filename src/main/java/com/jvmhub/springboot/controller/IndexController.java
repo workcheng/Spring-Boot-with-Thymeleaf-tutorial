@@ -52,7 +52,12 @@ public class IndexController {
                     HandlerMethod mappingInfoValue = requestMappingInfoHandlerMethodEntry.getValue();
 
                     RequestMethodsRequestCondition methodCondition = requestMappingInfo.getMethodsCondition();
-                    String requestType = SetUtils.firsts(methodCondition.getMethods()).name();
+
+                    RequestMethod first = SetUtils.first(methodCondition.getMethods());
+                    String requestType = "Unknown Method";
+                    if(null != first){
+                        requestType = first.name();
+                    }
 
                     PatternsRequestCondition patternsCondition = requestMappingInfo.getPatternsCondition();
                     String requestUrl = SetUtils.first(patternsCondition.getPatterns());
